@@ -1,14 +1,16 @@
+import { useCustomContext } from 'components/Context/SearchQueryContext';
 import { Header, Form, Button, ButtonLabel, Input } from './Searchbar.styled';
 import React, { useState } from 'react';
 
-const Searchbar = ({ searchValue }) => {
+const Searchbar = () => {
+  const searchResult = useCustomContext();
   /* ---------------------------------- STATE --------------------------------- */
   const [searchQuery, setSearchQuery] = useState('');
   /* --------------------------------- SUBMIT --------------------------------- */
   const onSubmit = e => {
     e.preventDefault();
     setSearchQuery('');
-    searchValue(searchQuery);
+    searchResult.setSearchText(searchQuery);
   };
   /* --------------------------------- CHANGE --------------------------------- */
   const handleChange = ({ currentTarget: { value } }) => {

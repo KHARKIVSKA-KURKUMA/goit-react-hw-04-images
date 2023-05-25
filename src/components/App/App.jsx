@@ -3,20 +3,16 @@ import Searchbar from 'components/Searchbar/Searchbar';
 import { Container } from './App.styled';
 import React, { useState } from 'react';
 import { ToastContainer } from 'react-toastify';
+import Context from 'components/Context/SearchQueryContext';
 
 const App = () => {
-  /* ---------------------------------- STATE --------------------------------- */
-  const [searchText, setSearchText] = useState('');
-  /* --------------------------------- SUBMIT --------------------------------- */
-  const formSubmit = searchQuery => {
-    setSearchText(searchQuery);
-  };
-  /* --------------------------------- RENDER --------------------------------- */
   return (
     <Container>
       <ToastContainer autoClose={1500} theme="colored" />
-      <Searchbar searchValue={formSubmit}></Searchbar>
-      <ImageGallery searchText={searchText}></ImageGallery>
+      <Context>
+        <Searchbar></Searchbar>
+        <ImageGallery></ImageGallery>
+      </Context>
     </Container>
   );
 };
