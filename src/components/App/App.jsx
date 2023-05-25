@@ -1,7 +1,6 @@
 import ImageGallery from 'components/ImageGallery/ImageGallery';
 import Searchbar from 'components/Searchbar/Searchbar';
 import { Container } from './App.styled';
-import React, { useState } from 'react';
 import { ToastContainer } from 'react-toastify';
 import Context from 'components/Context/SearchQueryContext';
 
