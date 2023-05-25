@@ -4,17 +4,17 @@ import React, { useEffect } from 'react';
 
 const Modal = ({ onClose, bigImg }) => {
   useEffect(() => {
+    const handleModal = e => {
+      if (e.code === 'Escape' || e.currentTarget === e.target) {
+        onClose();
+      }
+    };
     window.addEventListener('keydown', handleModal);
     return () => {
       window.removeEventListener('keydown', handleModal);
     };
-  }, []);
-  /* ------------------------------ HANDLE MODAL ------------------------------ */
-  const handleModal = e => {
-    if (e.code === 'Escape' || e.currentTarget === e.target) {
-      onClose();
-    }
-  };
+  }, [onClose]);
+
   /* --------------------------------- RENDER --------------------------------- */
   return (
     <Overlay onClick={onClose}>

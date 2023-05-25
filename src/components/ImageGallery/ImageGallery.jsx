@@ -1,6 +1,6 @@
 import { getSearchPic } from 'api/getSearchPic';
 import { GalleryList } from './ImageGallery.styled';
-import React, { Component, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ImageGalleryItem from './ImageGalleryItem';
 import { toast } from 'react-toastify';
 import Button from 'components/Button/Button';
