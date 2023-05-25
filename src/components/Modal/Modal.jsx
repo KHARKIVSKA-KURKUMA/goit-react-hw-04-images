@@ -1,32 +1,31 @@
 import { Overlay, ModalWindow, Image, CloseButton } from './Modal.styled';
 import { AiFillCloseCircle } from '@react-icons/all-files/ai/AiFillCloseCircle';
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
 
-export default class Modal extends Component {
-  componentDidMount() {
-    window.addEventListener('keydown', this.handleModal);
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('keydown', this.handleModal);
-  }
-
-  handleModal = e => {
+const Modal = ({ onClose, bigImg }) => {
+  useEffect(() => {
+    window.addEventListener('keydown', handleModal);
+    return () => {
+      window.removeEventListener('keydown', handleModal);
+    };
+  }, []);
+  /* ------------------------------ HANDLE MODAL ------------------------------ */
+  const handleModal = e => {
     if (e.code === 'Escape' || e.currentTarget === e.target) {
-      this.props.onClose();
+      onClose();
     }
   };
+  /* --------------------------------- RENDER --------------------------------- */
+  return (
+    <Overlay onClick={onClose}>
+      <ModalWindow>
+        <CloseButton onClick={onClose}>
+          <AiFillCloseCircle />
+        </CloseButton>
+        <Image src={bigImg} alt="big image" />
+      </ModalWindow>
+    </Overlay>
+  );
+};
 
-  render() {
-    return (
-      <Overlay onClick={this.props.onClose}>
-        <ModalWindow>
-          <CloseButton onClick={this.props.onClose}>
-            <AiFillCloseCircle />
-          </CloseButton>
-          <Image src={this.props.bigImg} alt="big image" />
-        </ModalWindow>
-      </Overlay>
-    );
-  }
-}
+export default Modal;

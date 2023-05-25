@@ -1,39 +1,38 @@
 import { Header, Form, Button, ButtonLabel, Input } from './Searchbar.styled';
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 
-export default class Searchbar extends Component {
-  state = {
-    searchQuery: '',
-  };
-  onSubmit = e => {
+const Searchbar = ({ searchValue }) => {
+  /* ---------------------------------- STATE --------------------------------- */
+  const [searchQuery, setSearchQuery] = useState('');
+  /* --------------------------------- SUBMIT --------------------------------- */
+  const onSubmit = e => {
     e.preventDefault();
-    this.setState({
-      searchQuery: '',
-    });
-    this.props.searchValue(this.state.searchQuery);
+    setSearchQuery('');
+    searchValue(searchQuery);
   };
-  handleChange = ({ currentTarget: { value } }) => {
-    this.setState({ searchQuery: value });
+  /* --------------------------------- CHANGE --------------------------------- */
+  const handleChange = ({ currentTarget: { value } }) => {
+    setSearchQuery(value.toLowerCase());
   };
-  render() {
-    const { searchQuery } = this.state;
-    return (
-      <Header>
-        <Form onSubmit={this.onSubmit}>
-          <Button type="submit">
-            <ButtonLabel>Search</ButtonLabel>
-          </Button>
-          <Input
-            type="text"
-            autoComplete="off"
-            autoFocus
-            name="searchQuery"
-            value={searchQuery}
-            placeholder="Search images and photos"
-            onChange={this.handleChange}
-          />
-        </Form>
-      </Header>
-    );
-  }
-}
+  /* --------------------------------- RENDER --------------------------------- */
+  return (
+    <Header>
+      <Form onSubmit={onSubmit}>
+        <Button type="submit">
+          <ButtonLabel>Search</ButtonLabel>
+        </Button>
+        <Input
+          type="text"
+          autoComplete="off"
+          autoFocus
+          name="searchQuery"
+          value={searchQuery}
+          placeholder="Search images and photos"
+          onChange={handleChange}
+        />
+      </Form>
+    </Header>
+  );
+};
+
+export default Searchbar;
